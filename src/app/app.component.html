@@ -1,0 +1,53 @@
+<main>
+    <div class="row mb-2 mt-5">
+        <div class="col-sm-6 offset-3">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" name="file" class="custom-file-input" id="inputGroupFile" required (change)="handleImport($event)"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                            <label class="custom-file-label" for="inputGroupFile">Choose file</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <button (click)="handleExport()" class="btn btn-primary float-right">
+                        Export <i class="fa fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 offset-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Movie</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Director</th>
+                        <th scope="col">Rating</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="movies.length; else elseBlock">
+                        <tr *ngFor="let movie of movies; let i = index">
+                            <th scope="row">{{ i + 1 }}</th>
+                            <td>{{ movie.Movie }}</td>
+                            <td>{{ movie.Category }}</td>
+                            <td>{{ movie.Director }}</td>
+                            <td><span class="badge bg-warning text-dark">{{ movie.Rating }}</span></td>
+                        </tr>
+                    </ng-container>
+                    <ng-template #elseBlock>
+                        <tr>
+                            <td colspan="5" class="text-center">No Movies Found.</td>
+                        </tr>
+                    </ng-template>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
